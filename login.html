@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+     
+    <script src="jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin:200" rel="stylesheet">
+</head>
+
+
+<body id="login">
+
+<div class="outer">
+  <div class="middle">
+    <div class="inner">
+   
+
+<center><p id="clock"></p></center>
+<div class="loginbox">
+<input type="text" placeholder="username" >
+<div class="separtor">
+    <i></i>
+</div>
+<input type="password" placeholder="password" >
+<br>
+<a href="info.html"><button>Sign in</button></a>
+<br><br>
+<center><p id="forgot">forgot password?<p></center>
+</div>
+
+</div>
+
+<script>
+var myVar = setInterval(function() {
+  myTimer();
+}, 1000);
+
+function myTimer() {
+  var d = new Date();
+  document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+}
+</script>
+
+
+
+</body>
+
+</html>
