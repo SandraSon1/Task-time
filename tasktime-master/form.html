@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+   <script src="jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+         <style>
+         html, body {
+  
+}
+
+[data-role="dynamic-fields"] > .form-inline + .form-inline {
+    margin-top: 0.5em;
+}
+
+[data-role="dynamic-fields"] > .form-inline [data-role="add"] {
+    display: none;
+}
+
+[data-role="dynamic-fields"] > .form-inline:last-child [data-role="add"] {
+    display: inline-block;
+}
+
+[data-role="dynamic-fields"] > .form-inline:last-child [data-role="remove"] {
+    display: none;
+}
+
+
+
+         </style>
+
+</head>
+
+<body style="background-color: #51CEFF;">
+
+ <a id="menu-toggle" href="#" class="btn-lg toggle"><i class="fa fa-navicon" style="font-size:36px;"></i></a>
+  <div id="sidebar-wrapper">
+        <a id="menu-close" href="#" class="btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove" style="font-size:30px;"></i></a>
+    <ul class="sidebar-nav">
+
+      <li class="sidebar-brand">
+      <a href="index.html" id="tt">Task Time</a>
+      </li>
+      <br>
+     
+      <li>
+        <a href="location.html">Create Journey</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="container-fluid">
+    <center><p id="clock3"></p></center>
+    <h1 id= "tat">TASK AND TIME</h1> <br><br>
+  </div>
+
+      <div data-role="dynamic-fields">
+        <div class="form-inline">
+          <div class="taskinput">
+          <form method="get">
+            <label class="sr-only" for="field-name">Field Name</label>
+            <input type="text" class="form-control" id="field-name" name="task" placeholder="Task" list="task">
+            <datalist id="task">
+              <option value="Breakfast">
+              <option value="Get dressed">
+              <option value="Bus ride">
+              <option value="Walk">
+              <option value="Stairs">
+              <option value="Pack lunch">
+              <option value="Elevator">
+              <option value="Bus Stop">
+              <option value="Bike">
+              <option value="Uber">
+              <option value="Taxi">
+              <option value="Lunch">
+              <option value="Drive">
+              <option value="Dinner">
+              <option value="Pack bag">
+              <option value="Traffic">
+              <option value="Run">
+              <option value="Transport">
+              <option value="Brush teeth">
+              <option value="Brush Hair">
+              <option value="Feed pet">
+              <option value="Eat">
+              <option value="Wait">
+              <option value="Pick up">
+              <option value="Shower">
+            </datalist>
+
+          </div>
+
+                      
+          <div class="minuteinput">
+            <label class="sr-only" for="field-value">Field Value</label>
+            <div class="input-group input-group-multiple-select" id="minutes">
+              <input onblur="findTotal()" type="number" class="form-control" name="values[]" placeholder="Min" list="min">
+              <datalist id="min">
+                <option value="Min">
+                <option value="1">
+                <option value="2">
+                <option value="3">
+                <option value="4">
+                <option value="5">
+                <option value="6">
+                <option value="7">
+                <option value="8">
+                <option value="9">
+                <option value="10">
+                <option value="15">
+                <option value="20">
+                <option value="25">
+                <option value="30">
+                <option value="35">  
+              </datalist>
+            </div>
+          </div>
+
+          <div class="button">
+            <button class="btn btn-danger" data-role="remove">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button class="btn btn-primary" data-role="add">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+
+        </div>  <!-- /div.form-inline -->
+      </div> 
+
+       <!-- /div[data-role="dynamic-fields"] -->
+
+
+
+     <!--   T O T A L -->
+     <div id="totaldiv">
+      <input type="text" name="total" class="form-control" id="total" placeholder="Total"/>
+     </div>
+      <a onclick="done()" class="btn btn-default" id="btncenter" role="button">save &#x2713;</a>
+    </form>
+
+  <div>
+
+  </div>
+
+</body>
+
+<!-- A D D I N G   S C R I P T -->
+
+   <script type="text/javascript">
+function findTotal(){
+    var arr = document.getElementsByName('values[]');
+    var tot=0;
+    for(var i=0;i<arr.length;i++){
+        if(parseInt(arr[i].value))
+            tot += parseInt(arr[i].value);
+    }
+    document.getElementById('total').value = tot;
+}
+
+    </script>
+
+<script>
+$(function() {
+    // Remove button click
+    $(document).on(
+        'click',
+        '[data-role="dynamic-fields"] > .form-inline [data-role="remove"]',
+        function(e) {
+            e.preventDefault();
+            $(this).closest('.form-inline').remove();
+        }
+    );
+    // Add button click
+    $(document).on(
+        'click',
+        '[data-role="dynamic-fields"] > .form-inline [data-role="add"]',
+        function(e) {
+            e.preventDefault();
+            var container = $(this).closest('[data-role="dynamic-fields"]');
+            new_field_group = container.children().filter('.form-inline:first-child').clone();
+            new_field_group.find('input').each(function(){
+                $(this).val('');
+            });
+            container.append(new_field_group);
+        }
+    );
+});
+
+    document.getElementById("btncenter").addEventListener("click", function(){
+    document.getElementById("tat").style.display = "none";
+    document.getElementById("task").style.display = "none";
+    document.getElementById("min").style.display = "none";
+    document.getElementById("btncenter").style.display = "none";
+
+    });
+
+  function done($id) {
+  var elems = document.getElementsByClassName("button");
+  for (i = 0; i < elems.length; i++) {
+    elems[i].style.display = 'none';
+  }
+  var elems = document.getElementsByClassName("taskinput");
+  for (i = 0; i < elems.length; i++) {
+    elems[i].style.width = '70vw';
+  }
+}
+
+</script>
+
+<!-- C  L  O  C  K -->
+
+<script>
+var myVar = setInterval(function() {
+  myTimer();
+}, 1000);
+
+function myTimer() {
+  var d = new Date();
+  document.getElementById("clock3").innerHTML = d.toLocaleTimeString();
+}
+</script>
+
+</html>
